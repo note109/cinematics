@@ -1,0 +1,30 @@
+{
+  "name": "cinematics",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp"
+  },
+  "repository": "https://github.com/note109/cinematics.git",
+  "author": "note109",
+  "license": "MIT",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.18.2",
+    "babel-plugin-transform-function-bind": "^6.8.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "eslint": "^3.10.2",
+    "eslint-config-google": "^0.7.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-load-plugins": "^1.4.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-pug": "^3.1.0",
+    "gulp-sass": "^2.3.2",
+    "gulp-webserver": "^0.9.1",
+    "pug": "^2.0.0-beta6",
+    "stylelint": "^7.6.0",
+    "stylelint-config-standard": "^15.0.0"
+  }
+}
