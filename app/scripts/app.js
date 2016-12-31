@@ -6,6 +6,8 @@ $(() => {
 
   const segment = new Segment(100, 50, 100, 20);
   console.log(segment.getPin());
+
+  new Stage([segment]);
 });
 
 /**
@@ -26,14 +28,12 @@ class Segment {
     this.rotation = 0;
     this.width = width;
     this.height = height;
-
-    this.init();
   }
 
   /**
     Draw segment
   */
-  init() {
+  render() {
     ctx.beginPath();
 
     ctx.rect(this.x, this.y, this.width, this.height);
@@ -62,6 +62,45 @@ class Segment {
     const y = this.y + Math.sin(angle) * this.width;
 
     return {x, y};
+  }
+}
+
+/**
+  Stage for draw shapes
+*/
+class Stage {
+  /**
+    @param {array} contents - instanses of shapes. Each has render() method.
+  */
+  constructor(contents) {
+    this.canvas = document.getElementById('stage');
+    this.contents = contents;
+
+    this.init();
+  }
+
+  /**
+    Initialize canvas and start render.
+  */
+  init() {
+    this.width = $('.wrapper').width();
+    this.height = $('.wrapper').height();
+    this.canvas.setAttribute('width', this.width);
+    this.canvas.setAttribute('height', this.height);
+
+    this.render();
+  }
+
+  /**
+    Render contents to canvas every animationFrame.
+  */
+  render() {
+    ctx.clearRect(0, 0, this.width, this.height);
+
+    this.contents.forEach((cnt) => {
+      cnt.render();
+    });
+    requestAnimationFrame(::this.render);
   }
 }
 
