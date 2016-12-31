@@ -5,7 +5,6 @@ $(() => {
   ctx = canvas.getContext('2d');
 
   const segment = new Segment(100, 50, 100, 20);
-  console.log(segment.getPin());
 
   new Stage([segment]);
 });
@@ -25,7 +24,7 @@ class Segment {
   constructor(x, y, width, height, color = '#fff') {
     this.x = x;
     this.y = y;
-    this.rotation = 0;
+    this.rotation = parseInt($('#slider').val(), 10);
     this.width = width;
     this.height = height;
   }
@@ -34,8 +33,12 @@ class Segment {
     Draw segment
   */
   render() {
-    ctx.beginPath();
+    ctx.save();
+    this.rotation = parseInt($('#slider').val(), 10);
+    ctx.translate(0, 0);
+    ctx.rotate(this.rotation * Math.PI / 180);
 
+    ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
     ctx.stroke();
 
@@ -50,6 +53,8 @@ class Segment {
     ctx.beginPath();
     ctx.arc(rightXPos, this.y + halfHeight, 2, 0, Math.PI * 2, true);
     ctx.stroke();
+
+    ctx.restore();
   }
 
   /**
