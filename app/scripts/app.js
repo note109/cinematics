@@ -20,17 +20,16 @@ class Segment {
   init() {
     ctx.beginPath();
 
-    ctx.rect(this.x, this.y, this.width, this.height);  
-    ctx.stroke(); 
+    ctx.rect(this.x, this.y, this.width, this.height);
+    ctx.stroke();
 
     ctx.beginPath();
-    ctx.arc(this.x + this.height / 2, this.y + this.height / 2, 2, 0, Math.PI * 2, true);   
-    ctx.stroke(); 
+    ctx.arc(this.x + this.height / 2, this.y + this.height / 2, 2, 0, Math.PI * 2, true);
+    ctx.stroke();
 
     ctx.beginPath();
     ctx.arc(this.x + this.width - this.height / 2, this.y + this.height / 2, 2, 0, Math.PI * 2, true);
-    ctx.stroke(); 
-
+    ctx.stroke();
   }
 }
 
