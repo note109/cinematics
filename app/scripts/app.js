@@ -4,7 +4,7 @@ $(() => {
   const canvas = document.getElementById('stage');
   ctx = canvas.getContext('2d');
 
-  new Segment(100, 50);
+  const segment = new Segment(100, 50, 100, 20);
 });
 
 /**
@@ -13,13 +13,15 @@ $(() => {
 class Segment {
   /**
     Initialize parameters
+    @param {number} x
+    @param {number} y
     @param {number} width
     @param {number} height
     @param {string} color
   */
-  constructor(width, height, color = '#fff') {
-    this.x = height / 2;
-    this.y = height / 2;
+  constructor(x, y, width, height, color = '#fff') {
+    this.x = x;
+    this.y = y;
     this.width = width;
     this.height = height;
 
