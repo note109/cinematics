@@ -9,6 +9,10 @@ $(() => {
   new Stage([segment]);
 });
 
+const getSlider = () => {
+  return parseInt($('#slider').val(), 10);
+};
+
 /**
   Create segment
 */
@@ -24,7 +28,7 @@ class Segment {
   constructor(x, y, width, height, color = '#fff') {
     this.x = x;
     this.y = y;
-    this.rotation = parseInt($('#slider').val(), 10);
+    this.rotation = getSlider();
     this.width = width;
     this.height = height;
   }
@@ -34,7 +38,7 @@ class Segment {
   */
   render() {
     ctx.save();
-    this.rotation = parseInt($('#slider').val(), 10);
+    this.rotation = getSlider();
     ctx.translate(0, 0);
     ctx.rotate(this.rotation * Math.PI / 180);
 
