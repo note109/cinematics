@@ -5,6 +5,7 @@ $(() => {
   ctx = canvas.getContext('2d');
 
   const segment = new Segment(100, 50, 100, 20);
+  console.log(segment.getPin());
 });
 
 /**
@@ -22,6 +23,7 @@ class Segment {
   constructor(x, y, width, height, color = '#fff') {
     this.x = x;
     this.y = y;
+    this.rotation = 0;
     this.width = width;
     this.height = height;
 
@@ -48,6 +50,18 @@ class Segment {
     ctx.beginPath();
     ctx.arc(rightXPos, this.y + halfHeight, 2, 0, Math.PI * 2, true);
     ctx.stroke();
+  }
+
+  /**
+    Get pin center position.
+    @return {object} {x, y} for pin right side.
+  */
+  getPin() {
+    const angle = this.rotation * Math.PI / 180;
+    const x = this.x + Math.cos(angle) * this.width;
+    const y = this.y + Math.sin(angle) * this.width;
+
+    return {x, y};
   }
 }
 
