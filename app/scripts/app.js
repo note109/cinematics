@@ -1,21 +1,21 @@
 let ctx = null;
 
 $(() => {
-  const canvas = document.getElementById("stage");
-  ctx = canvas.getContext("2d");
+  const canvas = document.getElementById('stage');
+  ctx = canvas.getContext('2d');
 
   new Segment(100, 50);
 });
 
 class Segment {
-  constructor(width, height, color = "#fff") {
+  constructor(width, height, color = '#fff') {
     this.x = height / 2;
     this.y = height / 2;
     this.width = width;
     this.height = height;
 
     this.init();
-  }
+}
 
   init() {
     ctx.beginPath();
