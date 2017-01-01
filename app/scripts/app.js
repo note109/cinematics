@@ -8,7 +8,11 @@ $(() => {
 
   const segment1 = new Segment(100, 120, 100, 20);
   const {x, y} = segment1.getPin();
-  const segment2 = new Segment(x - 10, y - 10, 100, 20, segment1);
+  const segment2 = new Segment(
+    x - 10, y - 10, 100, 20,
+    45, -Math.PI / 2,
+    segment1
+  );
 
   stage = new Stage([segment1, segment2]);
 });
@@ -52,18 +56,30 @@ class Segment {
     @param {number} y
     @param {number} width
     @param {number} height
+    @param {number} angle - base angle of segment.
+    @param {number} offset - The number for add to angle every rendering.
     @param {Segment} chainTo
     @param {string} color
   */
-  constructor(x, y, width, height, chainTo, color = '#fff') {
+  constructor(
+    x, y, width, height,
+    angle = 90, offset = 0, chainTo,
+    color = '#fff'
+  ) {
     this.x = x;
     this.y = y;
+
     this.id = getId();
-    this.rotation = getSlider(this.id);
+
     this.width = width;
     this.height = height;
+
     this.chainTo = chainTo;
+
     this.cycle = 0;
+    this.angle = angle;
+    this.offset = offset;
+    this.rotation = Math.sin(this.cycle + this.offset) * 45 + this.angle;
   }
 
   /**
@@ -85,8 +101,8 @@ class Segment {
     const halfHeight = this.height / 2;
     ctx.translate(this.x + halfHeight, this.y + halfHeight);
 
-    this.cycle += 0.1;
-    this.rotation = Math.sin(this.cycle) * 45 + 45;
+    this.cycle += 0.05;
+    this.rotation = Math.sin(this.cycle + this.offset) * 45 + this.angle;
     if (this.chainTo) {
       this.rotation += this.chainTo.rotation;
     }
