@@ -30,9 +30,9 @@ $('#getPin').on('click', (e) => {
 });
 
 // Slider value getter.
-const getSlider = (id) => {
-  return parseInt($(`#slider${id}`).val(), 10);
-};
+// const getSlider = (id) => {
+//   return parseInt($(`#slider${id}`).val(), 10);
+// };
 
 const getId = (() => {
   let id = 0;
