@@ -110,6 +110,15 @@ class Segment {
       this.vy += 0.2;
       this.x += this.vx;
       this.y += this.vy;
+
+      const maxY = this.getBounds().bottom;
+      if (maxY > stage.height) {
+        const dy = maxY - stage.height;
+
+        stage.contents.forEach((cnt) => {
+          cnt.y -= dy;
+        });
+      }
     }
 
     ctx.save();
@@ -166,6 +175,21 @@ class Segment {
     const y = (leftY + Math.sin(angle) * distance);
 
     return {x, y};
+  }
+
+  /**
+    Get bottom position of segment.
+    @return {object} {bottom}
+  */
+  getBounds() {
+    const leftTopY = this.y;
+    const leftBottomY = this.y + Math.sin(90) + this.height;
+    const rightTopY = this.y + Math.sin(0) + this.width;
+    const rightBottomY = rightTopY + Math.sin(90) + this.height;
+
+    return {
+      bottom: Math.max(leftTopY, leftBottomY, rightTopY, rightBottomY),
+    };
   }
 }
 
