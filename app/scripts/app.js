@@ -77,6 +77,8 @@ class Segment {
   ) {
     this.x = x;
     this.y = y;
+    this.vx = 0;
+    this.vy = 0;
 
     this.id = getId();
 
@@ -104,6 +106,10 @@ class Segment {
 
       this.x = chainToX - this.chainTo.height / 2;
       this.y = chainToY - this.chainTo.height / 2;
+    } else {
+      this.vy += 0.2;
+      this.x += this.vx;
+      this.y += this.vy;
     }
 
     ctx.save();
