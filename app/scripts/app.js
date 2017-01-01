@@ -1,4 +1,5 @@
-let ctx = null;
+let ctx;
+let stage;
 
 $(() => {
   const canvas = document.getElementById('stage');
@@ -6,7 +7,13 @@ $(() => {
 
   const segment = new Segment(100, 50, 100, 20);
 
-  new Stage([segment]);
+  stage = new Stage([segment]);
+});
+
+$('#getPin').on('click', (e) => {
+  const segment = stage.contents[0];
+
+  console.log(segment.getPin());
 });
 
 const getSlider = () => {
