@@ -63,6 +63,7 @@ class Segment {
     this.width = width;
     this.height = height;
     this.chainTo = chainTo;
+    this.cycle = 0;
   }
 
   /**
@@ -84,7 +85,8 @@ class Segment {
     const halfHeight = this.height / 2;
     ctx.translate(this.x + halfHeight, this.y + halfHeight);
 
-    this.rotation = getSlider(this.id);
+    this.cycle += 0.1;
+    this.rotation = Math.sin(this.cycle) * 45 + 45;
     if (this.chainTo) {
       this.rotation += this.chainTo.rotation;
     }
