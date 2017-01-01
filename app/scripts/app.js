@@ -6,7 +6,7 @@ $(() => {
   const canvas = document.getElementById('stage');
   ctx = canvas.getContext('2d');
 
-  const segment1 = new Segment(100, 50, 100, 20);
+  const segment1 = new Segment(100, 120, 100, 20);
   const {x, y} = segment1.getPin();
   const segment2 = new Segment(x - 10, y - 10, 100, 20, segment1);
 
