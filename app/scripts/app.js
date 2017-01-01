@@ -10,6 +10,15 @@ $(() => {
   stage = new Stage([segment]);
 });
 
+// Debugger for position.
+$('#stage').on('click', (e) => {
+  const rect = e.target.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  console.log(x, y);
+});
+
 $('#getPin').on('click', (e) => {
   const segment = stage.contents[0];
 
