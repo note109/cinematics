@@ -38,24 +38,25 @@ class Segment {
   */
   render() {
     ctx.save();
+
+    const halfHeight = this.height / 2;
+    ctx.translate(this.x + halfHeight, this.y + halfHeight);
+
     this.rotation = getSlider();
-    ctx.translate(0, 0);
     ctx.rotate(this.rotation * Math.PI / 180);
 
     ctx.beginPath();
-    ctx.rect(this.x, this.y, this.width, this.height);
+    ctx.rect(-halfHeight, -halfHeight, this.width, this.height);
     ctx.stroke();
 
-    const halfHeight = this.height / 2;
-
     ctx.beginPath();
-    ctx.arc(this.x + halfHeight, this.y + halfHeight, 2, 0, Math.PI * 2, true);
+    ctx.arc(0, 0, 2, 0, Math.PI * 2, true);
     ctx.stroke();
 
-    const rightXPos = this.x + this.width - halfHeight;
+    const rightXPos = this.width - halfHeight * 2;
 
     ctx.beginPath();
-    ctx.arc(rightXPos, this.y + halfHeight, 2, 0, Math.PI * 2, true);
+    ctx.arc(rightXPos, 0, 2, 0, Math.PI * 2, true);
     ctx.stroke();
 
     ctx.restore();
