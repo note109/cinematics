@@ -6,9 +6,11 @@ $(() => {
   const canvas = document.getElementById('stage');
   ctx = canvas.getContext('2d');
 
-  const segment = new Segment(100, 50, 100, 20);
+  const segment1 = new Segment(100, 50, 100, 20);
+  const {x, y} = segment1.getPin();
+  const segment2 = new Segment(x - 10, y - 10, 100, 20);
 
-  stage = new Stage([segment]);
+  stage = new Stage([segment1, segment2]);
 });
 
 // Debugger for position.
@@ -27,9 +29,18 @@ $('#getPin').on('click', (e) => {
   console.log(segment.getPin());
 });
 
-const getSlider = () => {
-  return parseInt($('#slider').val(), 10);
+// Slider value getter.
+const getSlider = (id) => {
+  return parseInt($(`#slider${id}`).val(), 10);
 };
+
+const getId = (() => {
+  let id = 0;
+
+  return () => {
+    return id++;
+  };
+})();
 
 /**
   Create segment
@@ -46,7 +57,8 @@ class Segment {
   constructor(x, y, width, height, color = '#fff') {
     this.x = x;
     this.y = y;
-    this.rotation = getSlider();
+    this.id = getId();
+    this.rotation = getSlider(this.id);
     this.width = width;
     this.height = height;
   }
@@ -60,7 +72,7 @@ class Segment {
     const halfHeight = this.height / 2;
     ctx.translate(this.x + halfHeight, this.y + halfHeight);
 
-    this.rotation = getSlider();
+    this.rotation = getSlider(this.id);
     ctx.rotate(this.rotation * Math.PI / 180);
 
     ctx.beginPath();
