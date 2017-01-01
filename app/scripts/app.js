@@ -8,7 +8,7 @@ $(() => {
 
   const segment1 = new Segment(100, 50, 100, 20);
   const {x, y} = segment1.getPin();
-  const segment2 = new Segment(x - 10, y - 10, 100, 20);
+  const segment2 = new Segment(x - 10, y - 10, 100, 20, segment1);
 
   stage = new Stage([segment1, segment2]);
 });
@@ -52,21 +52,33 @@ class Segment {
     @param {number} y
     @param {number} width
     @param {number} height
+    @param {Segment} chainTo
     @param {string} color
   */
-  constructor(x, y, width, height, color = '#fff') {
+  constructor(x, y, width, height, chainTo, color = '#fff') {
     this.x = x;
     this.y = y;
     this.id = getId();
     this.rotation = getSlider(this.id);
     this.width = width;
     this.height = height;
+    this.chainTo = chainTo;
   }
 
   /**
     Draw segment
   */
   render() {
+    if (this.chainTo) {
+      const {
+        x: chainToX,
+        y: chainToY,
+      } = this.chainTo.getPin();
+
+      this.x = chainToX - this.chainTo.height / 2;
+      this.y = chainToY - this.chainTo.height / 2;
+    }
+
     ctx.save();
 
     const halfHeight = this.height / 2;
