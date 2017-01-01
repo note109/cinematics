@@ -6,15 +6,23 @@ $(() => {
   const canvas = document.getElementById('stage');
   ctx = canvas.getContext('2d');
 
-  const segment1 = new Segment(100, 120, 100, 20);
-  const {x, y} = segment1.getPin();
-  const segment2 = new Segment(
-    x - 10, y - 10, 100, 20,
-    45, -Math.PI / 2,
-    segment1
+  const segment0 = new Segment(180, 120, 100, 20);
+  const {x: s0x, y: s0y} = segment0.getPin();
+  const segment1 = new Segment(
+    s0x - 10, s0y - 10, 100, 20,
+    0, 45, -Math.PI / 2,
+    segment0
   );
 
-  stage = new Stage([segment1, segment2]);
+  const segment2 = new Segment(180, 120, 100, 20, Math.PI);
+  const {x: s2x, y: s2y} = segment2.getPin();
+  const segment3 = new Segment(
+    s2x - 10, s2y - 10, 100, 20,
+    Math.PI, 45, -Math.PI / 2,
+    segment2
+  );
+
+  stage = new Stage([segment0, segment1, segment2, segment3]);
 });
 
 // Debugger for position.
@@ -56,6 +64,7 @@ class Segment {
     @param {number} y
     @param {number} width
     @param {number} height
+    @param {number} cycleOffset - add to cycle.
     @param {number} angle - base angle of segment.
     @param {number} offset - The number for add to angle every rendering.
     @param {Segment} chainTo
@@ -63,7 +72,7 @@ class Segment {
   */
   constructor(
     x, y, width, height,
-    angle = 90, offset = 0, chainTo,
+    cycleOffset = 0, angle = 90, offset = 0, chainTo,
     color = '#fff'
   ) {
     this.x = x;
@@ -76,7 +85,8 @@ class Segment {
 
     this.chainTo = chainTo;
 
-    this.cycle = 0;
+    this.cycleOffset = cycleOffset;
+    this.cycle = 0 + this.cycleOffset;
     this.angle = angle;
     this.offset = offset;
     this.rotation = Math.sin(this.cycle + this.offset) * 45 + this.angle;
