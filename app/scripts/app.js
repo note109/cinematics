@@ -95,8 +95,7 @@ class Segment {
     @return {object} {x, y} position of right pin.
   */
   getPin() {
-    const leftX = this.getLeftPin().x;
-    const leftY = this.getLeftPin().y;
+    const {x: leftX, y: leftY} = this.getLeftPin();
     // Sum of pin's horizontal margin is this.height
     const distance = this.width - this.height;
     const angle = this.rotation * Math.PI / 180;
