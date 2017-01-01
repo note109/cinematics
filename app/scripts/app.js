@@ -1,6 +1,7 @@
 let ctx;
 let stage;
 
+// Init shapes and stage
 $(() => {
   const canvas = document.getElementById('stage');
   ctx = canvas.getContext('2d');
@@ -19,6 +20,7 @@ $('#stage').on('click', (e) => {
   console.log(x, y);
 });
 
+// Add button click event.
 $('#getPin').on('click', (e) => {
   const segment = stage.contents[0];
 
