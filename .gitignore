@@ -2,7 +2,7 @@
 
 # OS X
 .DS_Store
-.swp
+*.swp
 
 # Logs
 logs
