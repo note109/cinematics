@@ -79,13 +79,29 @@ class Segment {
   }
 
   /**
-    Get pin center position.
-    @return {object} {x, y} for pin right side.
+    Get left side pin position.
+    @return {object} {x, y} position of left pin.
+  */
+  getLeftPin() {
+    const halfHeight = this.height / 2;
+    const x = this.x + halfHeight;
+    const y = this.y + halfHeight;
+
+    return {x, y};
+  }
+
+  /**
+    Get right side pin position.
+    @return {object} {x, y} position of right pin.
   */
   getPin() {
+    const leftX = this.getLeftPin().x;
+    const leftY = this.getLeftPin().y;
+    // Sum of pin's horizontal margin is this.height
+    const distance = this.width - this.height;
     const angle = this.rotation * Math.PI / 180;
-    const x = this.x + Math.cos(angle) * this.width;
-    const y = this.y + Math.sin(angle) * this.width;
+    const x = (leftX + Math.cos(angle) * distance);
+    const y = (leftY + Math.sin(angle) * distance);
 
     return {x, y};
   }
