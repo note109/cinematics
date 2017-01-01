@@ -85,6 +85,9 @@ class Segment {
     ctx.translate(this.x + halfHeight, this.y + halfHeight);
 
     this.rotation = getSlider(this.id);
+    if (this.chainTo) {
+      this.rotation += this.chainTo.rotation;
+    }
     ctx.rotate(this.rotation * Math.PI / 180);
 
     ctx.beginPath();
