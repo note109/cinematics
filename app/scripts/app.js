@@ -22,7 +22,8 @@ $(() => {
     segment2
   );
 
-  stage = new Stage([segment0, segment1, segment2, segment3]);
+  stage = new Stage();
+  stage.contents = [segment0, segment1, segment2, segment3];
 });
 
 // Debugger for position.
@@ -200,7 +201,7 @@ class Stage {
   /**
     @param {array} contents - instanses of shapes. Each has render() method.
   */
-  constructor(contents) {
+  constructor(contents = []) {
     this.canvas = document.getElementById('stage');
     this.contents = contents;
 
