@@ -55,6 +55,9 @@ const getId = (() => {
   };
 })();
 
+let VY = 0.2;
+let VX = 1.2;
+
 /**
   Create segment
 */
@@ -99,7 +102,9 @@ class Segment {
     Draw segment
   */
   render() {
+    let foot;
     if (this.chainTo) {
+      foot = this.getPin();
       const {
         x: chainToX,
         y: chainToY,
@@ -107,11 +112,12 @@ class Segment {
 
       this.x = chainToX - this.chainTo.height / 2;
       this.y = chainToY - this.chainTo.height / 2;
-    } else {
-      this.vy += 0.2;
-      this.x += this.vx;
-      this.y += this.vy;
 
+      this.vx = this.getPin().x - foot.x;
+      this.vy = this.getPin().y - foot.y;
+
+      this.chainTo.x += VX;
+      this.chainTo.y += VY;
       const maxY = this.getBounds().bottom;
       if (maxY > stage.height) {
         const dy = maxY - stage.height;
@@ -119,7 +125,23 @@ class Segment {
         stage.contents.forEach((cnt) => {
           cnt.y -= dy;
         });
+
+        // calc only one time in one rendering.
+        if (this.id === 0) {
+          VX -= this.vx;
+          VY -= this.vy;
+        }
       }
+    } else {
+      // calc only one time in one rendering.
+      if (this.id === 1) {
+        VY += 0.2;
+      }
+      // this.vx += VX;
+      // this.vy += VY;
+
+      this.x += VX;
+      this.y += VY;
     }
 
     ctx.save();
