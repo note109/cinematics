@@ -144,6 +144,13 @@ class Segment {
       this.y += VY;
     }
 
+    const wall = stage.width + 200;
+    if (this.x > stage.width + 100) {
+      stage.contents.forEach((cnt) => {
+        cnt.x -= wall;
+      });
+    }
+
     ctx.save();
 
     const halfHeight = this.height / 2;
