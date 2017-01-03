@@ -102,20 +102,7 @@ class Segment {
     Draw segment
   */
   render() {
-    let foot;
     if (this.chainTo) {
-      foot = this.getPin();
-      const {
-        x: chainToX,
-        y: chainToY,
-      } = this.chainTo.getPin();
-
-      this.x = chainToX - this.chainTo.height / 2;
-      this.y = chainToY - this.chainTo.height / 2;
-
-      this.vx = this.getPin().x - foot.x;
-      this.vy = this.getPin().y - foot.y;
-
       const maxY = this.getBounds().bottom;
       if (maxY > stage.height) {
         const dy = maxY - stage.height;
@@ -144,11 +131,6 @@ class Segment {
     const halfHeight = this.height / 2;
     ctx.translate(this.x + halfHeight, this.y + halfHeight);
 
-    this.cycle += 0.05;
-    this.rotation = Math.sin(this.cycle + this.offset) * 45 + this.angle;
-    if (this.chainTo) {
-      this.rotation += this.chainTo.rotation;
-    }
     ctx.rotate(this.rotation * Math.PI / 180);
 
     ctx.beginPath();
@@ -233,6 +215,7 @@ class Stage {
     this.height = $('.wrapper').height();
     this.canvas.setAttribute('width', this.width);
     this.canvas.setAttribute('height', this.height);
+    this.cycle = 0;
 
     this.render();
   }
@@ -244,6 +227,9 @@ class Stage {
     ctx.clearRect(0, 0, this.width, this.height);
 
     this.doVelocity();
+    this.walk(this.contents[0], this.contents[1], this.cycle);
+    this.walk(this.contents[2], this.contents[3], this.cycle + Math.PI);
+    this.cycle += 0.05;
 
     this.contents.forEach((cnt) => {
       cnt.render();
@@ -263,6 +249,31 @@ class Stage {
         cnt.y += VY;
       }
     });
+  }
+
+  /**
+    @param {Segment} foot foot segment
+    @param {Segment} leg leg segment
+    @param {number} cycle walk cycle
+  */
+  walk(foot, leg, cycle) {
+    if (!foot || !leg) {
+      return;
+    }
+
+    const footPosition = foot.getPin();
+
+    const footAngle = Math.sin(cycle) * 45 + 90;
+    const legAngle = Math.sin(cycle + Math.PI / 2) * 45 + 45;
+
+    foot.rotation = footAngle;
+    leg.rotation = foot.rotation + legAngle;
+
+    leg.x = foot.getPin().x - foot.height / 2;
+    leg.y = foot.getPin().y - foot.height / 2;
+
+    leg.vx = foot.getPin().x - footPosition.x; // require - height / 2 ?
+    leg.vy = foot.getPin().y - footPosition.y;
   }
 }
 
