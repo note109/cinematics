@@ -28,10 +28,10 @@ $('#stage').on('click', (e) => {
 });
 
 // Add button click event.
-$('#getPin').on('click', (e) => {
-  const segment = stage.contents[0];
+$('#getBounds').on('click', (e) => {
+  const segment = stage.contents[1];
 
-  console.log(segment.getPin());
+  console.log(segment.getBounds());
 });
 
 // Slider value getter.
