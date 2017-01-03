@@ -102,23 +102,6 @@ class Segment {
     Draw segment
   */
   render() {
-    if (this.chainTo) {
-      const maxY = this.getBounds().bottom;
-      if (maxY > stage.height) {
-        const dy = maxY - stage.height;
-
-        stage.contents.forEach((cnt) => {
-          cnt.y -= dy;
-        });
-
-        // calc only one time in one rendering.
-        if (this.id === 0) {
-          VX -= this.vx;
-          VY -= this.vy;
-        }
-      }
-    }
-
     const wall = stage.width + 200;
     if (this.x > stage.width + 100) {
       stage.contents.forEach((cnt) => {
@@ -230,6 +213,8 @@ class Stage {
     this.walk(this.contents[0], this.contents[1], this.cycle);
     this.walk(this.contents[2], this.contents[3], this.cycle + Math.PI);
     this.cycle += 0.05;
+    this.checkFloor(this.contents[1]);
+    this.checkFloor(this.contents[3]);
 
     this.contents.forEach((cnt) => {
       cnt.render();
@@ -274,6 +259,27 @@ class Stage {
 
     leg.vx = foot.getPin().x - footPosition.x; // require - height / 2 ?
     leg.vy = foot.getPin().y - footPosition.y;
+  }
+
+  /**
+    Check segment reach floor or not.
+    @param {Segment} segment
+  */
+  checkFloor(segment) {
+    if (!segment) {
+      return;
+    }
+
+    const yMax = segment.getBounds().bottom;
+    if (yMax > this.height) {
+      const dy = yMax - this.height;
+      this.contents.forEach((cnt) => {
+        cnt.y -= dy;
+
+        VX -= segment.vx;
+        VY -= segment.vy;
+      });
+    }
   }
 }
 
