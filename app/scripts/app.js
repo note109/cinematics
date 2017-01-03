@@ -234,7 +234,7 @@ class Stage {
     const legAngle = Math.sin(cycle + Math.PI / 2) * 45 + 45;
 
     foot.rotation = footAngle;
-    leg.rotation = foot.rotation + legAngle;
+    leg.rotation = footAngle + legAngle;
 
     leg.x = foot.getPin().x - foot.height / 2;
     leg.y = foot.getPin().y - foot.height / 2;
