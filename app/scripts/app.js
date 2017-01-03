@@ -132,13 +132,6 @@ class Segment {
           VY -= this.vy;
         }
       }
-    } else {
-      // calc only one time in one rendering.
-      if (this.id === 1) {
-        VY += 0.2;
-      }
-      this.x += VX;
-      this.y += VY;
     }
 
     const wall = stage.width + 200;
@@ -252,10 +245,26 @@ class Stage {
   render() {
     ctx.clearRect(0, 0, this.width, this.height);
 
+    this.doVelocity();
+
     this.contents.forEach((cnt) => {
       cnt.render();
     });
     requestAnimationFrame(::this.render);
+  }
+
+  /**
+    Add gravity & forwarding.
+  */
+  doVelocity() {
+    VY += 0.2;
+
+    this.contents.forEach((cnt) => {
+      if (cnt.id === 0 || cnt.id === 2) {
+        cnt.x += VX;
+        cnt.y += VY;
+      }
+    });
   }
 }
 
