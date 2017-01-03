@@ -85,6 +85,10 @@ class Segment {
       stage.contents.forEach((cnt) => {
         cnt.x -= wall;
       });
+    } else if (this.x < -100) {
+      stage.contents.forEach((cnt) => {
+        cnt.x += wall;
+      });
     }
 
     ctx.save();
