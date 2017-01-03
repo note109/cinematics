@@ -8,19 +8,11 @@ $(() => {
 
   const segment0 = new Segment(180, 120, 50, 15);
   const {x: s0x, y: s0y} = segment0.getPin();
-  const segment1 = new Segment(
-    s0x - 10, s0y - 10, 50, 15,
-    0, 45, -Math.PI / 2,
-    segment0
-  );
+  const segment1 = new Segment(s0x - 10, s0y - 10, 50, 15);
 
-  const segment2 = new Segment(180, 120, 50, 15, Math.PI);
+  const segment2 = new Segment(180, 120, 50, 15);
   const {x: s2x, y: s2y} = segment2.getPin();
-  const segment3 = new Segment(
-    s2x - 10, s2y - 10, 50, 15,
-    Math.PI, 45, -Math.PI / 2,
-    segment2
-  );
+  const segment3 = new Segment(s2x - 10, s2y - 10, 50, 15);
 
   stage = new Stage();
   stage.contents = [segment0, segment1, segment2, segment3];
