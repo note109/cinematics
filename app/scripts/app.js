@@ -55,8 +55,8 @@ const getId = (() => {
   };
 })();
 
-let VY = 0.2;
-let VX = 1.2;
+let VY = 0;
+let VX = 0;
 
 /**
   Create segment
