@@ -116,8 +116,6 @@ class Segment {
       this.vx = this.getPin().x - foot.x;
       this.vy = this.getPin().y - foot.y;
 
-      this.chainTo.x += VX;
-      this.chainTo.y += VY;
       const maxY = this.getBounds().bottom;
       if (maxY > stage.height) {
         const dy = maxY - stage.height;
