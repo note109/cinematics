@@ -137,9 +137,6 @@ class Segment {
       if (this.id === 1) {
         VY += 0.2;
       }
-      // this.vx += VX;
-      // this.vy += VY;
-
       this.x += VX;
       this.y += VY;
     }
