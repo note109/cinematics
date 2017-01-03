@@ -257,10 +257,10 @@ class Stage {
       const dy = yMax - this.height;
       this.contents.forEach((cnt) => {
         cnt.y -= dy;
-
-        VX -= segment.vx;
-        VY -= segment.vy;
       });
+
+      VX -= segment.vx;
+      VY -= segment.vy;
     }
   }
 }
