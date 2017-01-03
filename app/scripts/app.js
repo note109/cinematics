@@ -190,7 +190,7 @@ class Stage {
     this.doVelocity();
     this.walk(this.contents[0], this.contents[1], this.cycle);
     this.walk(this.contents[2], this.contents[3], this.cycle + Math.PI);
-    this.cycle += 0.05;
+    this.cycle += parseFloat($('#cycleSlider').val());
     this.checkFloor(this.contents[1]);
     this.checkFloor(this.contents[3]);
 
