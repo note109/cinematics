@@ -228,7 +228,7 @@ class Stage {
       return;
     }
 
-    const footPosition = foot.getPin();
+    const legPosition = leg.getPin();
 
     const footAngle = Math.sin(cycle) * 45 + 90;
     const legAngle = Math.sin(cycle + Math.PI / 2) * 45 + 45;
@@ -239,8 +239,8 @@ class Stage {
     leg.x = foot.getPin().x - foot.height / 2;
     leg.y = foot.getPin().y - foot.height / 2;
 
-    leg.vx = foot.getPin().x - footPosition.x; // require - height / 2 ?
-    leg.vy = foot.getPin().y - footPosition.y;
+    leg.vx = leg.getPin().x - legPosition.x;
+    leg.vy = leg.getPin().y - legPosition.y;
   }
 
   /**
