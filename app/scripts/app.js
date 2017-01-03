@@ -147,13 +147,39 @@ class Segment {
     @return {object} {bottom}
   */
   getBounds() {
-    const leftTopY = this.y;
-    const leftBottomY = this.y + Math.sin(90) + this.height;
-    const rightTopY = this.y + Math.sin(0) + this.width;
-    const rightBottomY = rightTopY + Math.sin(90) + this.height;
+    const halfHeight = this.height / 2;
+    const distanceMap = {
+      leftTop: {
+        dx: -halfHeight,
+        dy: -halfHeight,
+      },
+      leftBottom: {
+        dx: -halfHeight,
+        dy: halfHeight,
+      },
+      rightTop: {
+        dx: this.width - halfHeight,
+        dy: -halfHeight,
+      },
+      rightBottom: {
+        dx: this.width - halfHeight,
+        dy: halfHeight,
+      },
+    };
+
+    const angle = this.rotation * Math.PI / 180;
+    const {y: baseY} = this.getLeftPin();
+
+    const vertexY = Object.keys(distanceMap).map((key) => {
+      const v = distanceMap[key];
+      const dy2 = v.dx * Math.sin(angle) + v.dy * Math.cos(angle);
+      const y2 = baseY + dy2;
+
+      return y2;
+    });
 
     return {
-      bottom: Math.max(leftTopY, leftBottomY, rightTopY, rightBottomY),
+      bottom: Math.max(...vertexY),
     };
   }
 }
