@@ -19,25 +19,20 @@ $(() => {
 });
 
 // Debugger for position.
-$('#stage').on('click', (e) => {
-  const rect = e.target.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-
-  console.log(x, y);
-});
+// $('#stage').on('click', (e) => {
+//   const rect = e.target.getBoundingClientRect();
+//   const x = e.clientX - rect.left;
+//   const y = e.clientY - rect.top;
+//
+//   console.log(x, y);
+// });
 
 // Add button click event.
-$('#getBounds').on('click', (e) => {
-  const segment = stage.contents[1];
-
-  console.log(segment.getBounds());
-});
-
-// Slider value getter.
-// const getSlider = (id) => {
-//   return parseInt($(`#slider${id}`).val(), 10);
-// };
+// $('#getBounds').on('click', (e) => {
+//   const segment = stage.contents[1];
+//
+//   console.log(segment.getBounds());
+// });
 
 const getId = (() => {
   let id = 0;
