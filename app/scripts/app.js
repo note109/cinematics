@@ -68,17 +68,9 @@ class Segment {
     @param {number} y
     @param {number} width
     @param {number} height
-    @param {number} cycleOffset - add to cycle.
-    @param {number} angle - base angle of segment.
-    @param {number} offset - The number for add to angle every rendering.
-    @param {Segment} chainTo
     @param {string} color
   */
-  constructor(
-    x, y, width, height,
-    cycleOffset = 0, angle = 90, offset = 0, chainTo,
-    color = '#fff'
-  ) {
+  constructor(x, y, width, height, color = '#fff') {
     this.x = x;
     this.y = y;
     this.vx = 0;
@@ -89,13 +81,7 @@ class Segment {
     this.width = width;
     this.height = height;
 
-    this.chainTo = chainTo;
-
-    this.cycleOffset = cycleOffset;
-    this.cycle = 0 + this.cycleOffset;
-    this.angle = angle;
-    this.offset = offset;
-    this.rotation = Math.sin(this.cycle + this.offset) * 45 + this.angle;
+    this.rotation = 0;
   }
 
   /**
